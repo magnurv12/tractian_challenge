@@ -1,7 +1,10 @@
+import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
+
+/// The main function of the application
 class BaseAppWidget extends StatefulWidget {
+  /// Constructor [BaseAppWidget]
   const BaseAppWidget({super.key});
 
   @override

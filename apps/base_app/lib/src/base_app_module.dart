@@ -1,14 +1,19 @@
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tractian_challenge/src/presentation/views/assets/assets_page.dart';
-import 'package:tractian_challenge/src/presentation/views/home/home_page.dart';
+import 'package:dependencies/dependencies.dart';
 
 import 'base_app_module_routing.dart';
+import 'presentation/views/views.dart';
 
+/// Base app module
 class BaseAppModule extends Module {
+  @override
+  void binds(i) {
+    i.add(HomeViewmodel.new);
+  }
+
   @override
   void routes(r) {
     r.child(BaseAppModuleRouting.home, child: (_) => const HomePage());
     r.child(BaseAppModuleRouting.assets,
-        child: (_) => AssetsPage(id: r.args.data));
+        child: (_) => AssetsPage(id: r.args.data),);
   }
 }

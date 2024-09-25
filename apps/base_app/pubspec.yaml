@@ -30,9 +30,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  flutter_modular: ^6.3.4
-
+  dependencies:
+    path: ../dependencies
+  core:
+    path: ../core
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -40,6 +41,7 @@ dependencies:
   json_annotation: ^4.9.0
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
+  flutter_lints: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -50,7 +52,6 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
   build_runner: ^2.4.12
   freezed: ^2.5.7
   json_serializable: ^6.8.0

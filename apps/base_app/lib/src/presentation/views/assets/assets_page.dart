@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
+/// A page that displays the details of an asset.
+///
+/// The [AssetsPage] requires an [id] to identify which asset to display.
 class AssetsPage extends StatefulWidget {
+  ///
+  /// Parameters:
+  /// - `id`: The unique identifier of the asset to be displayed.
   final String id;
+
+  /// Constructor [AssetsPage]
   const AssetsPage({
     super.key,
     required this.id,
