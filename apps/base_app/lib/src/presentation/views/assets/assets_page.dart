@@ -27,16 +27,34 @@ class _AssetsPageState extends State<AssetsPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Assets Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Asets ${widget.id}',
-            ),
-            Text(
-              'Teste',
-              style: Theme.of(context).textTheme.headlineMedium,
+          children: [
+            ExpansionTile(
+              title: Text('Production Area - Raw Material'),
+              children: <Widget>[
+                ExpansionTile(
+                  title: Text('Charcoal Storage Sector'),
+                  children: <Widget>[
+                    ExpansionTile(
+                      title: Text('Conveyor Belt Assembly'),
+                      children: <Widget>[
+                        ListTile(title: Text('Motor TC01 Coal Unloading AF02')),
+                        ListTile(title: Text('Motor RT Coal AF01')),
+                      ],
+                    ),
+                  ],
+                ),
+                ExpansionTile(
+                  title: Text('Machinery House'),
+                  children: <Widget>[
+                    ListTile(title: Text('MOTORS H12D - Stage 1')),
+                    ListTile(title: Text('MOTORS H12D - Stage 2')),
+                    ListTile(title: Text('MOTORS H12D - Stage 3')),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

@@ -1,5 +1,4 @@
 import 'package:dependencies/dependencies.dart';
-import 'package:meta/meta.dart';
 
 import 'viewmodel_state.dart';
 

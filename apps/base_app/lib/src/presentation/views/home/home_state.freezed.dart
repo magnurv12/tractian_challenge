@@ -85,6 +85,8 @@ abstract class _$$HomeStateLoadedImplCopyWith<$Res> {
   factory _$$HomeStateLoadedImplCopyWith(_$HomeStateLoadedImpl value,
           $Res Function(_$HomeStateLoadedImpl) then) =
       __$$HomeStateLoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Company> companies});
 }
 
 /// @nodoc
@@ -97,30 +99,73 @@ class __$$HomeStateLoadedImplCopyWithImpl<$Res>
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? companies = null,
+  }) {
+    return _then(_$HomeStateLoadedImpl(
+      companies: null == companies
+          ? _value._companies
+          : companies // ignore: cast_nullable_to_non_nullable
+              as List<Company>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$HomeStateLoadedImpl implements HomeStateLoaded {
-  const _$HomeStateLoadedImpl();
+  const _$HomeStateLoadedImpl({required final List<Company> companies})
+      : _companies = companies;
+
+  final List<Company> _companies;
+  @override
+  List<Company> get companies {
+    if (_companies is EqualUnmodifiableListView) return _companies;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_companies);
+  }
 
   @override
   String toString() {
-    return 'HomeState.loaded()';
+    return 'HomeState.loaded(companies: $companies)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$HomeStateLoadedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$HomeStateLoadedImpl &&
+            const DeepCollectionEquality()
+                .equals(other._companies, _companies));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_companies));
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$HomeStateLoadedImplCopyWith<_$HomeStateLoadedImpl> get copyWith =>
+      __$$HomeStateLoadedImplCopyWithImpl<_$HomeStateLoadedImpl>(
+          this, _$identity);
 }
 
 abstract class HomeStateLoaded implements HomeState {
-  const factory HomeStateLoaded() = _$HomeStateLoadedImpl;
+  const factory HomeStateLoaded({required final List<Company> companies}) =
+      _$HomeStateLoadedImpl;
+
+  List<Company> get companies;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$HomeStateLoadedImplCopyWith<_$HomeStateLoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
