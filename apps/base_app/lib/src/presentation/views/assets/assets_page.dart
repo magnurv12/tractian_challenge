@@ -1,4 +1,9 @@
+import 'package:core/core.dart';
+import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
+
+import '../../../domain/domain.dart';
+import '../views.dart';
 
 /// A page that displays the details of an asset.
 ///
@@ -19,95 +24,74 @@ class AssetsPage extends StatefulWidget {
   State<AssetsPage> createState() => _AssetsPageState();
 }
 
-class _AssetsPageState extends State<AssetsPage> {
+class _AssetsPageState extends ViewState<AssetsPage, AssetsViewmodel> {
+  @override
+  void initState() {
+    super.initState();
+    viewModel.loadTree(widget.id);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Assets Page'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ExpansionTile(
-            title: const Text('Production Area - Raw Material'),
-            controlAffinity: ListTileControlAffinity.leading,
-            expandedCrossAxisAlignment: CrossAxisAlignment.start,
-            shape: const RoundedRectangleBorder(
-              side: BorderSide(
-                color: Colors.transparent,
+    return BlocBuilder<AssetsViewmodel, AssetsState>(
+      bloc: viewModel,
+      builder: (context, state) {
+        return switch (state) {
+          AssetsStateLoaded(:final nodes) => Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                title: const Text('Assets Page'),
               ),
-            ),
-            leading: Image.asset(
-              'assets/images/location.png',
-              width: 24,
-              height: 24,
-            ),
-            initiallyExpanded: true,
-            childrenPadding: const EdgeInsets.only(
-              left: 24.0,
-            ),
-            expandedAlignment: Alignment.topCenter,
-            children: const [
-              ExpansionTile(
-                title: Text('Charcoal Storage Sector'),
-                initiallyExpanded: true,
-                expandedCrossAxisAlignment: CrossAxisAlignment.start,
-                childrenPadding: EdgeInsets.only(
-                  left: 24.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
+              body: ListView(
                 children: [
-                  ExpansionTile(
-                    title: Text('Conveyor Belt Assembly'),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                    children: [
-                      ListTile(title: Text('Motor TC01 Coal Unloading AF02')),
-                      ListTile(title: Text('Motor RT Coal AF01')),
-                    ],
-                  ),
+                  for (final node in nodes) _ExpansionTitle(node: node),
                 ],
               ),
-              ExpansionTile(
-                title: Text('Machinery House'),
-                initiallyExpanded: true,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
-                childrenPadding: EdgeInsets.only(
-                  left: 24.0,
-                ),
-                children: [
-                  ListTile(title: Text('MOTORS H12D - Stage 1')),
-                  ListTile(title: Text('MOTORS H12D - Stage 2')),
-                  ListTile(title: Text('MOTORS H12D - Stage 3')),
-                ],
+            ),
+          AssetsStateError() =>
+            ErrorPage(onRetry: () => viewModel.loadTree(widget.id)),
+          _ => Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                title: const Text('Tractian'),
               ),
-            ],
-          ),
-        ],
-      ),
+              body: const Center(child: CircularProgressIndicator()),
+            ),
+        };
+      },
     );
   }
 }
 
-
 class _ExpansionTitle extends StatelessWidget {
-  const _ExpansionTitle({super.key});
+  final TreeNode node;
+  const _ExpansionTitle({
+    super.key,
+    required this.node,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ExpansionTile(
+      title: Text(node.name),
+      initiallyExpanded: true,
+      shape: const RoundedRectangleBorder(
+        side: BorderSide(
+          color: Colors.transparent,
+        ),
+      ),
+      childrenPadding: const EdgeInsets.only(
+        left: 24.0,
+      ),
+      children: switch (node) {
+        Location(:final children) => [
+            for (final child in children) _ExpansionTitle(node: child),
+          ],
+        Asset(:final children) => [
+            for (final child in children) _ExpansionTitle(node: child),
+          ],
+        _ => [],
+      },
+    );
   }
 }

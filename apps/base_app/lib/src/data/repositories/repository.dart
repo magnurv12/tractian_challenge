@@ -38,4 +38,30 @@ class Repository implements IRepository {
       return const Left(Failure.unexpected());
     }
   }
+
+  @override
+  Future<Either<Failure, List<TreeNode>>> getAssets(String companyId) async {
+    try {
+      final assets = await _dataSource.getAssets(companyId);
+      return Right(assets.map((e) => e.toEntity()).toList());
+    } on HttpException catch (e) {
+      return Left(Failure.server(message: e.message));
+    } catch (e) {
+      return const Left(Failure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TreeNode>>> getLocations(
+    String companyId,
+  ) async {
+    try {
+      final locations = await _dataSource.getLocations(companyId);
+      return Right(locations.map((e) => e.toEntityLocation()).toList());
+    } on HttpException catch (e) {
+      return Left(Failure.server(message: e.message));
+    } catch (e) {
+      return const Left(Failure.unexpected());
+    }
+  }
 }

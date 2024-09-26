@@ -17,7 +17,9 @@ class BaseAppModule extends Module {
     );
     i.add<IRepository>(Repository.new);
     i.add(HomeViewmodel.new);
+    i.add(AssetsViewmodel.new);
     i.add<IGetCompaniesUseCase>(GetCompaniesUseCase.new);
+    i.add<IGetViewTreeUseCase>(GetViewTreeUseCase.new);
   }
 
   @override

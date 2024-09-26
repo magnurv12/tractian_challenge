@@ -14,11 +14,13 @@ class HomeViewmodel extends ViewModel<HomeState> {
 
   @override
   void initViewModel() {
-    _loadData();
+    loadData();
     super.initViewModel();
   }
 
-  Future<void> _loadData() async {
+  /// Load the companies
+  Future<void> loadData() async {
+    emit(const HomeState.loading());
     final result = await _getCompaniesUseCase();
     final state = result.fold(
       (error) => const HomeState.error(),

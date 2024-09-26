@@ -3,8 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../domain.dart';
 
 part 'tree_node.freezed.dart';
-/// A `TreeNode` represents a node in a hierarchical structure, which can be 
-/// either a location, an asset, or a component. Each node type has its own 
+
+/// A `TreeNode` represents a node in a hierarchical structure, which can be
+/// either a location, an asset, or a component. Each node type has its own
 /// specific properties.
 ///
 /// - `TreeNode.location`: Represents a location node.
@@ -29,7 +30,6 @@ part 'tree_node.freezed.dart';
 
 @freezed
 class TreeNode with _$TreeNode {
-
   /// Represents a location node.
   const factory TreeNode.location({
     required String id,
@@ -49,8 +49,8 @@ class TreeNode with _$TreeNode {
   /// Represents a component node.
   const factory TreeNode.component({
     required String id,
-    required String sensorId,
     required String name,
+    required String sensorId,
     required SensorType sensorType,
     required SensorStatus status,
     String? parentId,

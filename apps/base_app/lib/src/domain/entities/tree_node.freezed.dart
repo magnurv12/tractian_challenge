@@ -27,7 +27,7 @@ mixin _$TreeNode {
     required TResult Function(
             String id, String name, String? parentId, List<TreeNode> children)
         asset,
-    required TResult Function(String id, String sensorId, String name,
+    required TResult Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)
         component,
   }) =>
@@ -40,7 +40,7 @@ mixin _$TreeNode {
     TResult? Function(
             String id, String name, String? parentId, List<TreeNode> children)?
         asset,
-    TResult? Function(String id, String sensorId, String name,
+    TResult? Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)?
         component,
   }) =>
@@ -53,7 +53,7 @@ mixin _$TreeNode {
     TResult Function(
             String id, String name, String? parentId, List<TreeNode> children)?
         asset,
-    TResult Function(String id, String sensorId, String name,
+    TResult Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)?
         component,
     required TResult orElse(),
@@ -247,7 +247,7 @@ class _$LocationImpl implements Location {
     required TResult Function(
             String id, String name, String? parentId, List<TreeNode> children)
         asset,
-    required TResult Function(String id, String sensorId, String name,
+    required TResult Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)
         component,
   }) {
@@ -263,7 +263,7 @@ class _$LocationImpl implements Location {
     TResult? Function(
             String id, String name, String? parentId, List<TreeNode> children)?
         asset,
-    TResult? Function(String id, String sensorId, String name,
+    TResult? Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)?
         component,
   }) {
@@ -279,7 +279,7 @@ class _$LocationImpl implements Location {
     TResult Function(
             String id, String name, String? parentId, List<TreeNode> children)?
         asset,
-    TResult Function(String id, String sensorId, String name,
+    TResult Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)?
         component,
     required TResult orElse(),
@@ -461,7 +461,7 @@ class _$AssetImpl implements Asset {
     required TResult Function(
             String id, String name, String? parentId, List<TreeNode> children)
         asset,
-    required TResult Function(String id, String sensorId, String name,
+    required TResult Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)
         component,
   }) {
@@ -477,7 +477,7 @@ class _$AssetImpl implements Asset {
     TResult? Function(
             String id, String name, String? parentId, List<TreeNode> children)?
         asset,
-    TResult? Function(String id, String sensorId, String name,
+    TResult? Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)?
         component,
   }) {
@@ -493,7 +493,7 @@ class _$AssetImpl implements Asset {
     TResult Function(
             String id, String name, String? parentId, List<TreeNode> children)?
         asset,
-    TResult Function(String id, String sensorId, String name,
+    TResult Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)?
         component,
     required TResult orElse(),
@@ -572,8 +572,8 @@ abstract class _$$ComponentImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String sensorId,
       String name,
+      String sensorId,
       SensorType sensorType,
       SensorStatus status,
       String? parentId});
@@ -593,8 +593,8 @@ class __$$ComponentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? sensorId = null,
     Object? name = null,
+    Object? sensorId = null,
     Object? sensorType = null,
     Object? status = null,
     Object? parentId = freezed,
@@ -604,13 +604,13 @@ class __$$ComponentImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      sensorId: null == sensorId
-          ? _value.sensorId
-          : sensorId // ignore: cast_nullable_to_non_nullable
-              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      sensorId: null == sensorId
+          ? _value.sensorId
+          : sensorId // ignore: cast_nullable_to_non_nullable
               as String,
       sensorType: null == sensorType
           ? _value.sensorType
@@ -633,8 +633,8 @@ class __$$ComponentImplCopyWithImpl<$Res>
 class _$ComponentImpl implements Component {
   const _$ComponentImpl(
       {required this.id,
-      required this.sensorId,
       required this.name,
+      required this.sensorId,
       required this.sensorType,
       required this.status,
       this.parentId});
@@ -642,9 +642,9 @@ class _$ComponentImpl implements Component {
   @override
   final String id;
   @override
-  final String sensorId;
-  @override
   final String name;
+  @override
+  final String sensorId;
   @override
   final SensorType sensorType;
   @override
@@ -654,7 +654,7 @@ class _$ComponentImpl implements Component {
 
   @override
   String toString() {
-    return 'TreeNode.component(id: $id, sensorId: $sensorId, name: $name, sensorType: $sensorType, status: $status, parentId: $parentId)';
+    return 'TreeNode.component(id: $id, name: $name, sensorId: $sensorId, sensorType: $sensorType, status: $status, parentId: $parentId)';
   }
 
   @override
@@ -663,9 +663,9 @@ class _$ComponentImpl implements Component {
         (other.runtimeType == runtimeType &&
             other is _$ComponentImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.sensorId, sensorId) ||
                 other.sensorId == sensorId) &&
-            (identical(other.name, name) || other.name == name) &&
             (identical(other.sensorType, sensorType) ||
                 other.sensorType == sensorType) &&
             (identical(other.status, status) || other.status == status) &&
@@ -675,7 +675,7 @@ class _$ComponentImpl implements Component {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, sensorId, name, sensorType, status, parentId);
+      runtimeType, id, name, sensorId, sensorType, status, parentId);
 
   /// Create a copy of TreeNode
   /// with the given fields replaced by the non-null parameter values.
@@ -694,11 +694,11 @@ class _$ComponentImpl implements Component {
     required TResult Function(
             String id, String name, String? parentId, List<TreeNode> children)
         asset,
-    required TResult Function(String id, String sensorId, String name,
+    required TResult Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)
         component,
   }) {
-    return component(id, sensorId, name, sensorType, status, parentId);
+    return component(id, name, sensorId, sensorType, status, parentId);
   }
 
   @override
@@ -710,11 +710,11 @@ class _$ComponentImpl implements Component {
     TResult? Function(
             String id, String name, String? parentId, List<TreeNode> children)?
         asset,
-    TResult? Function(String id, String sensorId, String name,
+    TResult? Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)?
         component,
   }) {
-    return component?.call(id, sensorId, name, sensorType, status, parentId);
+    return component?.call(id, name, sensorId, sensorType, status, parentId);
   }
 
   @override
@@ -726,13 +726,13 @@ class _$ComponentImpl implements Component {
     TResult Function(
             String id, String name, String? parentId, List<TreeNode> children)?
         asset,
-    TResult Function(String id, String sensorId, String name,
+    TResult Function(String id, String name, String sensorId,
             SensorType sensorType, SensorStatus status, String? parentId)?
         component,
     required TResult orElse(),
   }) {
     if (component != null) {
-      return component(id, sensorId, name, sensorType, status, parentId);
+      return component(id, name, sensorId, sensorType, status, parentId);
     }
     return orElse();
   }
@@ -775,17 +775,17 @@ class _$ComponentImpl implements Component {
 abstract class Component implements TreeNode {
   const factory Component(
       {required final String id,
-      required final String sensorId,
       required final String name,
+      required final String sensorId,
       required final SensorType sensorType,
       required final SensorStatus status,
       final String? parentId}) = _$ComponentImpl;
 
   @override
   String get id;
-  String get sensorId;
   @override
   String get name;
+  String get sensorId;
   SensorType get sensorType;
   SensorStatus get status;
   @override

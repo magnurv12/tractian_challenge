@@ -13,7 +13,9 @@ abstract class IRepository {
   /// the result of the operation.
   Future<Either<Failure, List<Company>>> getCompanies();
 
-  // Future<Either<Failure, Company>> getLocations(String id);
+  /// Fetches a list of tree nodes by company id.
+  Future<Either<Failure, List<TreeNode>>> getLocations(String companyId);
 
-  // Future<Either<Failure, Company>> getAssets(String id);
+  /// Fetches a list of tree nodes by company id.
+  Future<Either<Failure, List<TreeNode>>> getAssets(String companyId);
 }

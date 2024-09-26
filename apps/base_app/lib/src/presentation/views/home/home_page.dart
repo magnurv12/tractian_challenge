@@ -41,12 +41,16 @@ class _HomePageState extends ViewState<HomePage, HomeViewmodel> {
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  Modular.to.pushNamed('/assets', arguments: '5');
+                  Modular.to.pushNamed(
+                    '/assets',
+                    arguments: '662fd0ee639069143a8fc387',
+                  );
                 },
                 tooltip: 'Navigate',
                 child: const Icon(Icons.join_inner_sharp),
               ),
             ),
+          HomeStateError() => ErrorPage(onRetry: viewModel.loadData),
           _ => Scaffold(
               appBar: AppBar(
                 backgroundColor: Theme.of(context).colorScheme.inversePrimary,
