@@ -42,14 +42,20 @@ class _AssetsPageState extends ViewState<AssetsPage, AssetsViewmodel> {
                 backgroundColor: Theme.of(context).colorScheme.inversePrimary,
                 title: const Text('Assets Page'),
               ),
-              body: ListView.builder(
-                itemCount: nodes.length,
-                itemBuilder: (context, index) {
-                  final node = nodes[index];
-                  return _ExpansionTitle(
-                    node: node,
-                  );
-                },
+              body: CustomScrollView(
+                slivers: [
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final node = nodes[index];
+                        return _ExpansionTitle(
+                          node: node,
+                        );
+                      },
+                      childCount: nodes.length,
+                    ),
+                  ),
+                ],
               ),
             ),
           AssetsStateError() =>
@@ -93,41 +99,36 @@ class _ExpansionTitleState extends State<_ExpansionTitle> {
             });
           },
         ),
-        AnimatedSize(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          child:
-              _isExpanded || (widget.node is Location || widget.node is Asset)
-                  ? Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: switch (widget.node) {
-                        Location(:final children) => ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: children.length,
-                            itemBuilder: (context, index) {
-                              final node = children[index];
-                              return _ExpansionTitle(
-                                node: node,
-                              );
-                            },
-                          ),
-                        Asset(:final children) => ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: children.length,
-                            itemBuilder: (context, index) {
-                              final node = children[index];
-                              return _ExpansionTitle(
-                                node: node,
-                              );
-                            },
-                          ),
-                        _ => const SizedBox.shrink(),
-                      },
-                    )
-                  : const SizedBox.shrink(),
-        ),
+        _isExpanded
+            ? Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: switch (widget.node) {
+                  Location(:final children) => SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final node = children[index];
+                          return _ExpansionTitle(
+                            node: node,
+                          );
+                        },
+                        childCount: children.length,
+                      ),
+                    ),
+                  Asset(:final children) => SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          final node = children[index];
+                          return _ExpansionTitle(
+                            node: node,
+                          );
+                        },
+                        childCount: children.length,
+                      ),
+                    ),
+                  _ => const SizedBox.shrink(),
+                },
+              )
+            : const SizedBox.shrink(),
       ],
     );
   }

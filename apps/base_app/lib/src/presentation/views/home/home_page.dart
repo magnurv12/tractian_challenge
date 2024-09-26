@@ -29,12 +29,26 @@ class _HomePageState extends ViewState<HomePage, HomeViewmodel> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text(
-                      'You have pushed the button this many times:',
+                    ElevatedButton(
+                      onPressed: () => Modular.to.pushNamed(
+                        '/assets',
+                        arguments: '662fd0ee639069143a8fc387',
+                      ),
+                      child: const Text('Jaguar'),
                     ),
-                    Text(
-                      'Teste',
-                      style: Theme.of(context).textTheme.headlineMedium,
+                    ElevatedButton(
+                      onPressed: () => Modular.to.pushNamed(
+                        '/assets',
+                        arguments: '662fd0fab3fd5656edb39af5',
+                      ),
+                      child: const Text('Tobias'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => Modular.to.pushNamed(
+                        '/assets',
+                        arguments: '662fd100f990557384756e58',
+                      ),
+                      child: const Text('Apex'),
                     ),
                   ],
                 ),
@@ -43,7 +57,7 @@ class _HomePageState extends ViewState<HomePage, HomeViewmodel> {
                 onPressed: () {
                   Modular.to.pushNamed(
                     '/assets',
-                    arguments: '662fd100f990557384756e58',
+                    arguments: '662fd0ee639069143a8fc387',
                   );
                 },
                 tooltip: 'Navigate',
