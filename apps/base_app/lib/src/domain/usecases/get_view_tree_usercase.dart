@@ -28,45 +28,12 @@ class GetViewTreeUseCase implements IGetViewTreeUseCase {
       return locationsResult.isLeft ? locationsResult : assetsResut;
     }
 
-    final locations = locationsResult.right;
-    final assets = assetsResut.right;
-
-    // Mapa para armazenar todos os TreeNodes (por ID)
-    final Map<String, TreeNode> treeMap = {};
-
-    // Adicionando Locations ao mapa de TreeNodes
-    for (var location in locations) {
-      treeMap[location.id] = TreeNode.location(
-        id: location.id,
-        name: location.name,
-        parentId: location.parentId,
-      );
-    }
-
-    // Adicionando Assets e Components ao mapa de TreeNodes
-    for (var item in assets) {
-      if (item is Asset) {
-        treeMap[item.id] = TreeNode.asset(
-          id: item.id,
-          name: item.name,
-          parentId: item.parentId,
-        );
-      } else if (item is Component) {
-        treeMap[item.id] = TreeNode.component(
-          id: item.id,
-          name: item.name,
-          sensorId: item.sensorId,
-          parentId: item.parentId,
-          sensorType: item.sensorType,
-          status: item.status,
-        );
-      }
-    }
+    final treeNodes = locationsResult.right..addAll(assetsResut.right);
 
     // Função recursiva para construir a árvore a partir de um nó pai
     TreeNode buildTreeRecursively(TreeNode node) {
       // Busca todos os filhos do nó atual
-      final children = treeMap.values
+      final children = treeNodes
           .where((child) => child.parentId == node.id)
           .map(buildTreeRecursively) // Chamada recursiva para os filhos
           .toList();
@@ -82,8 +49,7 @@ class GetViewTreeUseCase implements IGetViewTreeUseCase {
     }
 
     // Filtrar os nós raiz (aqueles que não têm parentId)
-    final rootNodes =
-        treeMap.values.where((node) => node.parentId == null).toList();
+    final rootNodes = treeNodes.where((node) => node.parentId == null).toList();
 
     // Construir a árvore recursivamente a partir dos nós raiz
     final tree = rootNodes.map(buildTreeRecursively).toList();

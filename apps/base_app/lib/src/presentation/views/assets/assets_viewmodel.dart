@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../domain/domain.dart';
 import 'assets_state.dart';
@@ -15,7 +16,7 @@ class AssetsViewmodel extends ViewModel<AssetsState> {
   /// Load the tree based on the company id
   Future<void> loadTree(String companyId) async {
     emit(const AssetsState.loading());
-    final result = await _getViewTreeUseCase(companyId);
+    final result = await compute(_getViewTreeUseCase.call, companyId);
     final state = result.fold(
       (error) => const AssetsState.error(),
       (nodes) => AssetsState.loaded(
