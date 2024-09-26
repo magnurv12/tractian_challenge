@@ -14,6 +14,7 @@ class GetViewTreeUseCase implements IGetViewTreeUseCase {
 
   @override
   Future<Either<Failure, List<TreeNode>>> call(String companyId) async {
+    // Fazendo as chamadas para obter Locations e Assets
     final [
       locationsResult,
       assetsResut,
@@ -22,6 +23,7 @@ class GetViewTreeUseCase implements IGetViewTreeUseCase {
       repository.getAssets(companyId),
     ]);
 
+    // Verificação de erro
     if (locationsResult.isLeft || assetsResut.isLeft) {
       return locationsResult.isLeft ? locationsResult : assetsResut;
     }
@@ -49,8 +51,7 @@ class GetViewTreeUseCase implements IGetViewTreeUseCase {
           name: item.name,
           parentId: item.parentId,
         );
-      }
-      if (item is Component) {
+      } else if (item is Component) {
         treeMap[item.id] = TreeNode.component(
           id: item.id,
           name: item.name,
@@ -62,29 +63,31 @@ class GetViewTreeUseCase implements IGetViewTreeUseCase {
       }
     }
 
-    // Agora ligamos os nós aos seus pais
-    for (var node in treeMap.values) {
-      if (node.parentId != null && treeMap.containsKey(node.parentId)) {
-        final parent = treeMap[node.parentId]!;
+    // Função recursiva para construir a árvore a partir de um nó pai
+    TreeNode buildTreeRecursively(TreeNode node) {
+      // Busca todos os filhos do nó atual
+      final children = treeMap.values
+          .where((child) => child.parentId == node.id)
+          .map(buildTreeRecursively) // Chamada recursiva para os filhos
+          .toList();
 
-        // Usando copyWith para atualizar a lista de filhos do pai
-        treeMap[node.parentId!] = parent.when(
-          location: (id, name, parentId, children) =>
-              (parent as Location).copyWith(
-            children: [...children, node],
-          ),
-          asset: (id, name, parentId, children) => (parent as Asset).copyWith(
-            children: [...children, node],
-          ),
-          component: (id, name, sensorId, sensorType, status, parentId) =>
-              (parent as Component),
-        );
-      }
+      // Atualiza o nó atual com seus filhos
+      return node.when(
+        location: (id, name, parentId, _) =>
+            (node as Location).copyWith(children: children),
+        asset: (id, name, parentId, _) =>
+            (node as Asset).copyWith(children: children),
+        component: (id, name, sensorId, sensorType, status, parentId) => node,
+      );
     }
 
-    // Retornar apenas os nós raiz (aqueles que não têm pai)
-    return Right(
-      treeMap.values.where((node) => node.parentId == null).toList(),
-    );
+    // Filtrar os nós raiz (aqueles que não têm parentId)
+    final rootNodes =
+        treeMap.values.where((node) => node.parentId == null).toList();
+
+    // Construir a árvore recursivamente a partir dos nós raiz
+    final tree = rootNodes.map(buildTreeRecursively).toList();
+
+    return Right(tree);
   }
 }
