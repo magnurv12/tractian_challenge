@@ -43,7 +43,7 @@ class _HomePageState extends ViewState<HomePage, HomeViewmodel> {
                 onPressed: () {
                   Modular.to.pushNamed(
                     '/assets',
-                    arguments: '662fd0ee639069143a8fc387',
+                    arguments: '662fd100f990557384756e58',
                   );
                 },
                 tooltip: 'Navigate',
