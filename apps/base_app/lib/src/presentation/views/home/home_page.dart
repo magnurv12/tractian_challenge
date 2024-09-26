@@ -23,7 +23,7 @@ class _HomePageState extends ViewState<HomePage, HomeViewmodel> {
           HomeStateLoaded() => Scaffold(
               appBar: AppBar(
                 backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                title: const Text('widget.title'),
+                title: const Text('Tractian'),
               ),
               body: Center(
                 child: Column(
@@ -47,7 +47,13 @@ class _HomePageState extends ViewState<HomePage, HomeViewmodel> {
                 child: const Icon(Icons.join_inner_sharp),
               ),
             ),
-          _ => const CircularProgressIndicator(),
+          _ => Scaffold(
+              appBar: AppBar(
+                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                title: const Text('Tractian'),
+              ),
+              body: const Center(child: CircularProgressIndicator()),
+            ),
         };
       },
     );

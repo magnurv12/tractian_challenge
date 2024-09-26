@@ -27,38 +27,87 @@ class _AssetsPageState extends State<AssetsPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Assets Page'),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ExpansionTile(
-              title: Text('Production Area - Raw Material'),
-              children: <Widget>[
-                ExpansionTile(
-                  title: Text('Charcoal Storage Sector'),
-                  children: <Widget>[
-                    ExpansionTile(
-                      title: Text('Conveyor Belt Assembly'),
-                      children: <Widget>[
-                        ListTile(title: Text('Motor TC01 Coal Unloading AF02')),
-                        ListTile(title: Text('Motor RT Coal AF01')),
-                      ],
-                    ),
-                  ],
-                ),
-                ExpansionTile(
-                  title: Text('Machinery House'),
-                  children: <Widget>[
-                    ListTile(title: Text('MOTORS H12D - Stage 1')),
-                    ListTile(title: Text('MOTORS H12D - Stage 2')),
-                    ListTile(title: Text('MOTORS H12D - Stage 3')),
-                  ],
-                ),
-              ],
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ExpansionTile(
+            title: const Text('Production Area - Raw Material'),
+            controlAffinity: ListTileControlAffinity.leading,
+            expandedCrossAxisAlignment: CrossAxisAlignment.start,
+            shape: const RoundedRectangleBorder(
+              side: BorderSide(
+                color: Colors.transparent,
+              ),
             ),
-          ],
-        ),
+            leading: Image.asset(
+              'assets/images/location.png',
+              width: 24,
+              height: 24,
+            ),
+            initiallyExpanded: true,
+            childrenPadding: const EdgeInsets.only(
+              left: 24.0,
+            ),
+            expandedAlignment: Alignment.topCenter,
+            children: const [
+              ExpansionTile(
+                title: Text('Charcoal Storage Sector'),
+                initiallyExpanded: true,
+                expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                childrenPadding: EdgeInsets.only(
+                  left: 24.0,
+                ),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Colors.transparent,
+                  ),
+                ),
+                children: [
+                  ExpansionTile(
+                    title: Text('Conveyor Belt Assembly'),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    children: [
+                      ListTile(title: Text('Motor TC01 Coal Unloading AF02')),
+                      ListTile(title: Text('Motor RT Coal AF01')),
+                    ],
+                  ),
+                ],
+              ),
+              ExpansionTile(
+                title: Text('Machinery House'),
+                initiallyExpanded: true,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Colors.transparent,
+                  ),
+                ),
+                childrenPadding: EdgeInsets.only(
+                  left: 24.0,
+                ),
+                children: [
+                  ListTile(title: Text('MOTORS H12D - Stage 1')),
+                  ListTile(title: Text('MOTORS H12D - Stage 2')),
+                  ListTile(title: Text('MOTORS H12D - Stage 3')),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
+  }
+}
+
+
+class _ExpansionTitle extends StatelessWidget {
+  const _ExpansionTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
