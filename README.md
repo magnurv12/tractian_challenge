@@ -9,7 +9,7 @@ Você pode assistir ao vídeo de demonstração que mostra a abertura do aplicat
 
 ## 📝 Descrição
 
-Este projeto foi desenvolvido em **2 dias**, com o objetivo de entregar uma solução funcional dentro do prazo proposto. O aplicativo permite a navegação entre diferentes empresas e a aplicação de filtros personalizados.
+Este projeto foi desenvolvido em 2 dias, com o objetivo de entregar uma solução funcional dentro do prazo proposto. O aplicativo permite a navegação entre diferentes empresas e a aplicação de filtros personalizados.
 
 ## 🚀 Funcionalidades
 
