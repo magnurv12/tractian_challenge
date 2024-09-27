@@ -41,6 +41,8 @@ Se tivesse mais tempo para refinar o projeto, eu realizaria as seguintes melhori
 
 10. **Melhoria na Paralelização**: Com mais tempo, revisaria como paralelizar melhor as chamadas recursivas, possivelmente utilizando uma abordagem com `ListQueue()` para lidar com listas dinâmicas de maneira mais eficiente.
 
+11. **Teste unitários**: Adicionar teste unitarios para garantir que todas as regras de negocio tem o retorno esperado, e garantir que cada caso de uso, retorne o estado esperado na tela.
+
 ## 🛠 Tecnologias Utilizadas
 
 - **Flutter**: Framework para desenvolvimento mobile
