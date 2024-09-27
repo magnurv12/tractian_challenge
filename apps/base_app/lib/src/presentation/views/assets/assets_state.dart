@@ -13,6 +13,7 @@ sealed class AssetsState extends ViewModelState with _$AssetsState {
 
   /// Creates a loaded state
   const factory AssetsState.loaded({
+    required List<TreeNode> initialNodes,
     required List<TreeNode> nodes,
   }) = AssetsStateLoaded;
 

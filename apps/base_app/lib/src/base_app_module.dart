@@ -27,7 +27,7 @@ class BaseAppModule extends Module {
     r.child(BaseAppModuleRouting.home, child: (_) => const HomePage());
     r.child(
       BaseAppModuleRouting.assets,
-      child: (_) => AssetsPage(id: r.args.data),
+      child: (_) => AssetsPage(companyId: r.args.data),
     );
   }
 }

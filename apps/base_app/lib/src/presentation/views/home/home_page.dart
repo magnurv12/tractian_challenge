@@ -4,9 +4,22 @@ import 'package:flutter/material.dart';
 
 import '../views.dart';
 
-/// The home page of the application
+/// {@template home_page}
+/// A `StatefulWidget` that represents the home page of the application.
+///
+/// This widget is the entry point for the home page and is responsible for
+/// creating its corresponding state object, `_HomePageState`.
+///
+/// The `HomePage` widget requires a key, which can be passed to its constructor.
+///
+/// Example usage:
+///
+/// ```dart
+/// HomePage(key: Key('home_page'));
+/// ```
+/// {@endtemplate}
 class HomePage extends StatefulWidget {
-  /// Constructor [HomePage]
+  /// {@macro home_page}
   const HomePage({super.key});
 
   @override
@@ -20,7 +33,7 @@ class _HomePageState extends ViewState<HomePage, HomeViewmodel> {
       bloc: viewModel,
       builder: (context, state) {
         return switch (state) {
-          HomeStateLoaded() => Scaffold(
+          HomeStateLoaded(:final companies) => Scaffold(
               appBar: AppBar(
                 backgroundColor: Theme.of(context).colorScheme.inversePrimary,
                 title: const Text('Tractian'),
@@ -28,40 +41,21 @@ class _HomePageState extends ViewState<HomePage, HomeViewmodel> {
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ElevatedButton(
-                      onPressed: () => Modular.to.pushNamed(
-                        '/assets',
-                        arguments: '662fd0ee639069143a8fc387',
-                      ),
-                      child: const Text('Jaguar'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => Modular.to.pushNamed(
-                        '/assets',
-                        arguments: '662fd0fab3fd5656edb39af5',
-                      ),
-                      child: const Text('Tobias'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => Modular.to.pushNamed(
-                        '/assets',
-                        arguments: '662fd100f990557384756e58',
-                      ),
-                      child: const Text('Apex'),
-                    ),
-                  ],
+                  children: companies
+                      .map(
+                        (company) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            onPressed: () => Modular.to.pushNamed(
+                              '/assets',
+                              arguments: company.id,
+                            ),
+                            child: Text(company.name),
+                          ),
+                        ),
+                      )
+                      .toList(),
                 ),
-              ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  Modular.to.pushNamed(
-                    '/assets',
-                    arguments: '662fd0ee639069143a8fc387',
-                  );
-                },
-                tooltip: 'Navigate',
-                child: const Icon(Icons.join_inner_sharp),
               ),
             ),
           HomeStateError() => ErrorPage(onRetry: viewModel.loadData),

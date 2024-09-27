@@ -87,7 +87,7 @@ abstract class _$$AssetsStateLoadedImplCopyWith<$Res> {
           $Res Function(_$AssetsStateLoadedImpl) then) =
       __$$AssetsStateLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<TreeNode> nodes});
+  $Res call({List<TreeNode> initialNodes, List<TreeNode> nodes});
 }
 
 /// @nodoc
@@ -103,9 +103,14 @@ class __$$AssetsStateLoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? initialNodes = null,
     Object? nodes = null,
   }) {
     return _then(_$AssetsStateLoadedImpl(
+      initialNodes: null == initialNodes
+          ? _value._initialNodes
+          : initialNodes // ignore: cast_nullable_to_non_nullable
+              as List<TreeNode>,
       nodes: null == nodes
           ? _value._nodes
           : nodes // ignore: cast_nullable_to_non_nullable
@@ -117,8 +122,19 @@ class __$$AssetsStateLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AssetsStateLoadedImpl implements AssetsStateLoaded {
-  const _$AssetsStateLoadedImpl({required final List<TreeNode> nodes})
-      : _nodes = nodes;
+  const _$AssetsStateLoadedImpl(
+      {required final List<TreeNode> initialNodes,
+      required final List<TreeNode> nodes})
+      : _initialNodes = initialNodes,
+        _nodes = nodes;
+
+  final List<TreeNode> _initialNodes;
+  @override
+  List<TreeNode> get initialNodes {
+    if (_initialNodes is EqualUnmodifiableListView) return _initialNodes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_initialNodes);
+  }
 
   final List<TreeNode> _nodes;
   @override
@@ -130,7 +146,7 @@ class _$AssetsStateLoadedImpl implements AssetsStateLoaded {
 
   @override
   String toString() {
-    return 'AssetsState.loaded(nodes: $nodes)';
+    return 'AssetsState.loaded(initialNodes: $initialNodes, nodes: $nodes)';
   }
 
   @override
@@ -138,12 +154,16 @@ class _$AssetsStateLoadedImpl implements AssetsStateLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AssetsStateLoadedImpl &&
+            const DeepCollectionEquality()
+                .equals(other._initialNodes, _initialNodes) &&
             const DeepCollectionEquality().equals(other._nodes, _nodes));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_nodes));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_initialNodes),
+      const DeepCollectionEquality().hash(_nodes));
 
   /// Create a copy of AssetsState
   /// with the given fields replaced by the non-null parameter values.
@@ -156,9 +176,11 @@ class _$AssetsStateLoadedImpl implements AssetsStateLoaded {
 }
 
 abstract class AssetsStateLoaded implements AssetsState {
-  const factory AssetsStateLoaded({required final List<TreeNode> nodes}) =
-      _$AssetsStateLoadedImpl;
+  const factory AssetsStateLoaded(
+      {required final List<TreeNode> initialNodes,
+      required final List<TreeNode> nodes}) = _$AssetsStateLoadedImpl;
 
+  List<TreeNode> get initialNodes;
   List<TreeNode> get nodes;
 
   /// Create a copy of AssetsState
