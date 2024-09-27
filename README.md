@@ -4,7 +4,7 @@
 
 Você pode assistir ao vídeo de demonstração que mostra a abertura do aplicativo para cada empresa e a seleção de um filtro:
 
-[![Assista ao vídeo]]([https://www.youtube.com/watch?v=ID_DO_VIDEO](https://youtube.com/shorts/GvVRqMlqkj8))
+[Assista ao vídeo](https://youtube.com/shorts/GvVRqMlqkj8)
 
 
 
