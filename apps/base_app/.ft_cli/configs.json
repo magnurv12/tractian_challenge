@@ -1,0 +1,1 @@
+{"repositoryPathInterface":"domain/repositories","repositoryPath":"data/repositories","datasourcePathInterface":"data/datasources","datasourcePath":"external/datasources","usecasePathInterface":"domain/usecases","usecasePath":"domain/usecases","pagePath":"presentation/ui/pages/{{name.snakeCase}}","controllerPath":"presentation/ui/pages/{{name.snakeCase}}"}
