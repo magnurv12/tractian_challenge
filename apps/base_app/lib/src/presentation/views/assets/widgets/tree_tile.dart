@@ -59,9 +59,10 @@ class _TreeTileState extends State<TreeTile> {
     return TreeIndentation(
       entry: widget.entry,
       guide: IndentGuide.scopingLines(
-        origin: .6,
+        origin: .9,
         thickness: 1.0,
         color: Colors.black.withOpacity(.1),
+        indent: 25,
       ),
       child: Padding(
         padding: const EdgeInsets.only(right: 8),
@@ -79,7 +80,11 @@ class _TreeTileState extends State<TreeTile> {
             _buildIcon(),
             const SizedBox(width: 8),
             Flexible(
-              child: Text.rich(titleSpan),
+              child: Text.rich(
+                titleSpan,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             const SizedBox(width: 8),
             _buildSensorType(),
