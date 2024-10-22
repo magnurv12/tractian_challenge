@@ -1,7 +1,7 @@
 # Tractian Challenge
 
 ## 📹 Demonstração
-[!](https://github.com/user-attachments/assets/1318de8e-f74e-48a3-bc08-a34555acb8b9)
+[!](https://github.com/user-attachments/assets/ac59da1a-f9bc-4825-b86b-ad49e652c897)
 
 ## 📝 Descrição
 Aplicativo desenvolvido para facilitar a navegação entre diferentes empresas, permitindo ao usuário aplicar filtros personalizados para refinar a visualização de dados. A aplicação foi construída com uma arquitetura modular, proporcionando flexibilidade e fácil manutenção.
